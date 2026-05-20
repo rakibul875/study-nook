@@ -17,6 +17,7 @@ const AddRoomsPage = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     data.amenities = selectedAmenities;
+    data.userName=user?.name;
     console.log(data)
 
     const res = await fetch("http://localhost:8000/rooms", {

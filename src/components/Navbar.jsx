@@ -2,12 +2,19 @@
 import Link from "next/link";
 import React from "react";
 import NavLink from "./NavLink";
-import { Avatar } from "@heroui/react";
+import { Avatar, Dropdown, Label } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 const NavBar = () => {
+  const { data: session } = authClient.useSession();
+  console.log(session);
+  const user = session?.user;
+  console.log(user);
   const router = useRouter();
   const handelSgnOut = async () => {
+    await authClient.signOut();
     router.push("/");
   };
 
@@ -20,15 +27,19 @@ const NavBar = () => {
         <NavLink href={"/rooms"}>Rooms</NavLink>
       </li>
       {/* login hole */}
-      <li className="font-semibold text-lg">
-        <NavLink href={"/add-room"}>Add Room</NavLink>
-      </li>
-      <li className="font-semibold text-lg">
-        <NavLink href={"/my-listings"}> My Listings</NavLink>
-      </li>
-      <li className="font-semibold text-lg">
-        <NavLink href={"/my-bookings"}> My Bookings</NavLink>
-      </li>
+      {user && (
+        <>
+          <li className="font-semibold text-lg">
+            <NavLink href={"/add-room"}>Add Room</NavLink>
+          </li>
+          <li className="font-semibold text-lg">
+            <NavLink href={"/my-listings"}> My Listings</NavLink>
+          </li>
+          <li className="font-semibold text-lg">
+            <NavLink href={"/my-bookings"}> My Bookings</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -73,80 +84,66 @@ const NavBar = () => {
         </div>
         <div className="navbar-end gap-2">
           <div className="navbar-end gap-2">
-            {/* {user ? ( */}
-            {/* <div className="flex gap-3">
-                <Avatar>
-                  <Avatar.Image
-                    alt="John Doe"
-                    src={user?.image}
-                    referrerPolicy="no-referrer"
-                  />
-                  <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
-                </Avatar>
-                <button onClick={handelSgnOut} className="btn bg-orange-500 text-white">Logout</button>
-              </div> */}
-            {/* ) : ( */}
-            <div className="">
-              <label className="toggle text-base-content">
-                <input
-                  type="checkbox"
-                  value="synthwave"
-                  className="theme-controller"
-                />
-
-                <svg
-                  aria-label="sun"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
+            {user ? (
+              <Dropdown>
+                <Dropdown.Trigger className="rounded-full">
+                  <Avatar>
+                    <Avatar.Image
+                      alt="John Doe"
+                      src={user?.image}
+                      referrerPolicy="no-referrer"
+                    />
+                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
+                </Dropdown.Trigger>
+                <Dropdown.Popover>
+                  <div className="px-3 pt-3 pb-1">
+                    <div className="flex items-center gap-2">
+                      <div className="flex flex-col gap-0">
+                        <p className="text-sm leading-5 font-medium">
+                          {user?.name}
+                        </p>
+                        <p className="text-xs leading-none text-muted">
+                          {user?.email}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <Dropdown.Menu>
+                    <Dropdown.Item id="dashboard" textValue="Dashboard">
+                      <Label>Dashboard</Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item id="profile" textValue="Profile">
+                      <Label>Profile</Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      id="logout"
+                      textValue="Logout"
+                      variant="danger"
+                    >
+                      <div className="flex w-full items-center justify-between gap-2">
+                        <button onClick={handelSgnOut} className="flex gap-3 items-center">
+                          <Label>Log Out</Label>
+                          <FaArrowUpRightFromSquare className="size-3.5 text-danger" />
+                        </button>
+                      </div>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown.Popover>
+              </Dropdown>
+            ) : (
+              <div className="flex gap-1 lg:gap-3">
+                <Link
+                  href="/login"
+                  className="btn border border-cyan-700-500 text-cyan-700"
                 >
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2"></path>
-                    <path d="M12 20v2"></path>
-                    <path d="m4.93 4.93 1.41 1.41"></path>
-                    <path d="m17.66 17.66 1.41 1.41"></path>
-                    <path d="M2 12h2"></path>
-                    <path d="M20 12h2"></path>
-                    <path d="m6.34 17.66-1.41 1.41"></path>
-                    <path d="m19.07 4.93-1.41 1.41"></path>
-                  </g>
-                </svg>
-
-                <svg
-                  aria-label="moon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                  </g>
-                </svg>
-              </label>
-            </div>
-            <div className="flex gap-1 lg:gap-3">
-              <Link
-                href="/login"
-                className="btn border border-cyan-700-500 text-cyan-700"
-              >
-                Login
-              </Link>
-              <Link href="/sineUp" className="btn bg-cyan-700 text-white">
-                Register
-              </Link>
-            </div>
-            {/* )} */}
+                  Login
+                </Link>
+                <Link href="/sineUp" className="btn bg-cyan-700 text-white">
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

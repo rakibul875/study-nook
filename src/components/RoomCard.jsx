@@ -4,9 +4,9 @@ import { MdMeetingRoom } from "react-icons/md";
 import { LuProjector } from "react-icons/lu";
 import Image from "next/image";
 import { FaChalkboard } from "react-icons/fa6";
+import Link from "next/link";
 
 const RoomCard = ({ room }) => {
- 
   const formatAmenity = (item) => {
     if (item === "wifi") return "Wi-Fi";
     if (item === "projector") return "Projector";
@@ -22,8 +22,6 @@ const RoomCard = ({ room }) => {
 
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
-
-      
       <div className="relative">
         <Image
           src={room.imageUrl}
@@ -33,15 +31,12 @@ const RoomCard = ({ room }) => {
           className="w-full h-52 object-cover"
         />
 
-       
         <div className="absolute top-3 right-3 bg-teal-100 text-teal-700 text-sm px-3 py-1 rounded-full font-medium">
           ${room.hourlyRate}/hr
         </div>
       </div>
 
       <div className="p-4 space-y-3">
-
-        
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-lg flex items-center gap-2">
             <MdMeetingRoom className="text-gray-500" />
@@ -54,18 +49,13 @@ const RoomCard = ({ room }) => {
           </span>
         </div>
 
-       
         <p className="text-sm text-gray-500 flex items-center gap-2">
           <FaMapMarkerAlt />
           Floor {room.floor}
         </p>
 
-       
-        <p className="text-xs text-gray-400 line-clamp-2">
-          {room.description}
-        </p>
+        <p className="text-xs text-gray-400 line-clamp-2">{room.description}</p>
 
-    
         <div className="flex flex-wrap gap-2">
           {room.amenities?.map((item, i) => (
             <span
@@ -78,10 +68,11 @@ const RoomCard = ({ room }) => {
           ))}
         </div>
 
-        
-        <button className="w-full border border-teal-500 text-teal-600 py-2 rounded-full text-sm hover:bg-teal-50 transition">
-          View Details
-        </button>
+        <Link href={`/rooms/${room._id}`}>
+          <button className="w-full border border-teal-500 text-teal-600 py-2 rounded-full text-sm hover:bg-teal-50 transition">
+            View Details
+          </button>
+        </Link>
       </div>
     </div>
   );

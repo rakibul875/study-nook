@@ -15,7 +15,6 @@ import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 
 const SignUpPage = () => {
-
   const handelRegister = async (e) => {
     e.preventDefault();
 
