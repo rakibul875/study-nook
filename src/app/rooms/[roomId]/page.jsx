@@ -1,3 +1,4 @@
+import BookNowCard from '@/components/BookNowCard';
 import RoomsDetailsPage from '@/components/RoomsDetailsPage';
 import React from 'react';
 
@@ -8,9 +9,10 @@ const RoomsDetails = async({params}) => {
     const data=await res.json()
     console.log(data)
     return (
-        <div>
+        <div className=''>
             <div className="">
                 <RoomsDetailsPage data={data}/>
+               
             </div>
         </div>
     );
