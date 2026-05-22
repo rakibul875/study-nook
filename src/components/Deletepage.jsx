@@ -5,18 +5,18 @@ import { redirect } from "next/navigation";
 import { MdOutlineDelete } from "react-icons/md";
 
 export function DeletePage ({data}) {
-    const {_id}=data;
-    const handelDelete=async()=>{
-         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}destination/${_id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    // const {_id}=data;
+    // const handelDelete=async()=>{
+    //      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}destination/${_id}`, {
+    //   method: "DELETE",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    // });
 
-    const data = await res.json();
-    redirect('/destinations')
-    }
+    // const data = await res.json();
+    // redirect('/destinations')
+    // }
   return (
     <AlertDialog>
       <Button className="border border-red-500 bg-white text-red-500 hover:bg-gray-100 rounded px-5 py-5">
@@ -33,7 +33,7 @@ export function DeletePage ({data}) {
             </AlertDialog.Header>
             <AlertDialog.Body>
               <p>
-                Are you sure you want to delete<strong> {data.destinationName}</strong>{" "}
+                Are you sure you want to delete<strong>name</strong>{" "}
                 This action cannot be undone and will permanently remove this
                 travel package from the system.
               </p>
@@ -42,7 +42,7 @@ export function DeletePage ({data}) {
               <Button slot="close" variant="tertiary">
                 Cancel
               </Button>
-              <Button onClick={handelDelete} slot="close" variant="danger">
+              <Button slot="close" variant="danger">
                 Delete
               </Button>
             </AlertDialog.Footer>

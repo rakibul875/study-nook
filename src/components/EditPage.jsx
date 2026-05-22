@@ -16,26 +16,26 @@ import {
 import { CiEdit } from "react-icons/ci";
 
 export function EditPage({data}) {
-    const { category,imageUrl,description, destinationName, country, price, duration, _id } =
-    data;
-  const handelEditDestinationSubmit = async (e) => {
-    e.preventDefault();
-    const fromData = new FormData(e.currentTarget);
-    const destinationData = Object.fromEntries(fromData.entries());
-    console.log(destinationData);
+    // const { category,imageUrl,description, destinationName, country, price, duration, _id } =
+    // data;
+  // const handelEditDestinationSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const fromData = new FormData(e.currentTarget);
+  //   const destinationData = Object.fromEntries(fromData.entries());
+  //   console.log(destinationData);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(destinationData),
-    });
+  //   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(destinationData),
+  //   });
 
-    const data = await res.json();
+  //   const data = await res.json();
 
-    // console.log(data);
-  };
+  //   // console.log(data);
+  // };
   return (
     <Modal>
       <Button className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 rounded px-5 py-5">
@@ -60,7 +60,7 @@ export function EditPage({data}) {
 
             <Modal.Body className="p-3 sm:p-5 md:p-6">
               <Surface variant="default" className="rounded-2xl">
-                <form onSubmit={handelEditDestinationSubmit} className="space-y-5">
+                {/* <form className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="md:col-span-2">
                       <TextField defaultValue={destinationName} name="destinationName" isRequired>
@@ -70,7 +70,7 @@ export function EditPage({data}) {
                       </TextField>
                     </div>
 
-                    <TextField defaultValue={country}  name="country" isRequired>
+                    <TextField   name="country" isRequired>
                       <Label>Country</Label>
                       <Input placeholder="Indonesia" />
                       <FieldError />
@@ -164,7 +164,7 @@ export function EditPage({data}) {
                       Update Destination
                     </Button>
                   </div>
-                </form>
+                </form> */}
               </Surface>
             </Modal.Body>
           </Modal.Dialog>

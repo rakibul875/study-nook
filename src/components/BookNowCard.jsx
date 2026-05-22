@@ -129,13 +129,13 @@ const BookNowCard = ({ data }) => {
       </button>
       <div className="">
         {currentUser ? (
-          <div className="">
+          <div className="flex items-center mt-5 gap-2 justify-center">
             <EditPage />
             <DeletePage />
           </div>
         ) : (
           <p className="text-center text-[11px] text-gray-400 font-medium mt-3">
-            You won't be charged yet
+            You won`t be charged yet
           </p>
         )}
       </div>
