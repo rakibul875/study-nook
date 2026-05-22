@@ -130,8 +130,8 @@ const BookNowCard = ({ data }) => {
       <div className="">
         {currentUser ? (
           <div className="flex items-center mt-5 gap-2 justify-center">
-            <EditPage />
-            <DeletePage />
+            <EditPage data={data}/>
+            <DeletePage  data={data}/>
           </div>
         ) : (
           <p className="text-center text-[11px] text-gray-400 font-medium mt-3">

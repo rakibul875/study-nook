@@ -2,40 +2,42 @@
 
 import {
   Button,
-  FieldError,
   Input,
   Label,
-  ListBox,
   Modal,
   Surface,
   TextArea,
   TextField,
-  Select,
 } from "@heroui/react";
+import { useState } from "react";
 
 import { CiEdit } from "react-icons/ci";
 
-export function EditPage({data}) {
-    // const { category,imageUrl,description, destinationName, country, price, duration, _id } =
-    // data;
-  // const handelEditDestinationSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const fromData = new FormData(e.currentTarget);
-  //   const destinationData = Object.fromEntries(fromData.entries());
-  //   console.log(destinationData);
+export function EditPage({ data }) {
+  const {_id,name,description,floor,hourlyRate,capacity,imageUrl}=data;
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
 
-  //   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(destinationData),
-  //   });
+  const toggleAmenity = (value) => {
+    setSelectedAmenities((prev) =>
+      prev.includes(value) ? prev.filter((a) => a !== value) : [...prev, value],
+    );
+  };
 
-  //   const data = await res.json();
+  const onSubmit =async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+       const res = await fetch(`http://localhost:8000/rooms/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-  //   // console.log(data);
-  // };
+    const roomData = await res.json();
+    
+  };
   return (
     <Modal>
       <Button className="border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 rounded px-5 py-5">
@@ -60,111 +62,111 @@ export function EditPage({data}) {
 
             <Modal.Body className="p-3 sm:p-5 md:p-6">
               <Surface variant="default" className="rounded-2xl">
-                {/* <form className="space-y-5">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="md:col-span-2">
-                      <TextField defaultValue={destinationName} name="destinationName" isRequired>
-                        <Label>Destination Name</Label>
-                        <Input placeholder="Bali Paradise" />
-                        <FieldError />
-                      </TextField>
-                    </div>
+                <form onSubmit={onSubmit} className="space-y-5">
+                  <div>
+                    <h2 className="text-lg font-semibold">Add New Room</h2>
+                    <p className="text-sm text-gray-400">
+                      Configure your study nook with precision and atmosphere.
+                    </p>
+                  </div>
 
-                    <TextField   name="country" isRequired>
-                      <Label>Country</Label>
-                      <Input placeholder="Indonesia" />
-                      <FieldError />
+                  <TextField name="name" defaultValue={name} isRequired>
+                    <Label>Room Name</Label>
+                    <Input
+                      placeholder="e.g. The Silicon Library"
+                      className="rounded-full bg-gray-100 w-full"
+                    />
+                  </TextField>
+
+                  <TextField name="description" defaultValue={description} isRequired>
+                    <Label>Description</Label>
+                    <TextArea
+                      placeholder="Describe the atmosphere and unique features..."
+                      className="rounded-xl bg-gray-100"
+                    />
+                  </TextField>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <TextField name="floor" defaultValue={floor} isRequired>
+                      <Label>Floor</Label>
+                      <Input
+                        placeholder="4"
+                        className="rounded-full bg-gray-100"
+                      />
                     </TextField>
 
-                    <div>
-                      <Label className="mb-2 block">Category</Label>
-
-                      <Select
-                        name="category"
-                        placeholder="Select category"
-                        className="w-full"
-                      >
-                        <Select.Trigger>
-                          <Select.Value />
-                          <Select.Indicator />
-                        </Select.Trigger>
-
-                        <Select.Popover>
-                          <ListBox>
-                            {[
-                              "Beach",
-                              "Mountain",
-                              "City",
-                              "Adventure",
-                              "Cultural",
-                              "Luxury",
-                            ].map((item) => (
-                              <ListBox.Item key={item} id={item}>
-                                {item}
-                              </ListBox.Item>
-                            ))}
-                          </ListBox>
-                        </Select.Popover>
-                      </Select>
-                    </div>
-
-                    <TextField defaultValue={price} name="price" type="number" isRequired>
-                      <Label>Price (USD)</Label>
-                      <Input placeholder="1299" />
-                      <FieldError />
+                    <TextField name="hourlyRate" defaultValue={hourlyRate} isRequired>
+                      <Label>Hourly Rate ($)</Label>
+                      <Input
+                        placeholder="25"
+                        className="rounded-full bg-gray-100"
+                      />
                     </TextField>
 
-                    <TextField defaultValue={duration} name="duration" isRequired>
-                      <Label>Duration</Label>
-                      <Input placeholder="7 Days / 6 Nights" />
-                      <FieldError />
+                    <TextField name="capacity" defaultValue={capacity} isRequired>
+                      <Label>Capacity</Label>
+                      <Input
+                        placeholder="6"
+                        className="rounded-full bg-gray-100"
+                      />
                     </TextField>
 
-                    <div className="md:col-span-2">
-                      <TextField name="departureDate" isRequired>
-                        <Label>Departure Date</Label>
-                        <Input type="date" />
-                        <FieldError />
-                      </TextField>
-                    </div>
+                    <TextField name="imageUrl" defaultValue={imageUrl} isRequired>
+                      <Label>Room Image URL</Label>
+                      <Input
+                        placeholder="https://..."
+                        className="rounded-full bg-gray-100"
+                      />
+                    </TextField>
+                  </div>
 
-                    <div className="md:col-span-2">
-                      <TextField defaultValue={imageUrl} name="imageUrl" isRequired>
-                        <Label>Image URL</Label>
-                        <Input
-                          type="url"
-                          placeholder="https://example.com/image.jpg"
-                        />
-                        <FieldError />
-                      </TextField>
-                    </div>
+                  <div>
+                    <Label>Amenities</Label>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {[
+                        { label: "Wi-Fi", value: "wifi" },
+                        { label: "Whiteboard", value: "whiteboard" },
+                        { label: "Projector", value: "projector" },
+                        { label: "Quiet Zone", value: "quiet_zone" },
+                        { label: "Power Outlets", value: "power_outlets" },
+                        { label: "Air Conditioning", value: "ac" },
+                      ].map((item) => {
+                        const isSelected = selectedAmenities.includes(
+                          item.value,
+                        );
 
-                    <div className="md:col-span-2">
-                      <TextField defaultValue={description} name="description" isRequired>
-                        <Label>Description</Label>
-                        <TextArea placeholder="Describe the travel experience..." />
-                        <FieldError />
-                      </TextField>
+                        return (
+                          <button
+                            type="button"
+                            key={item.value}
+                            onClick={() => toggleAmenity(item.value)}
+                            className={`px-3 py-1 rounded-full text-sm border transition
+                                      ${
+                                        isSelected
+                                          ? "bg-teal-500 text-white border-teal-500"
+                                          : "bg-gray-100 text-gray-600 border-gray-200"
+                                      }`}
+                          >
+                            {item.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row justify-end gap-3 pt-5">
-                    <Button
-                      slot="close"
-                      variant="bordered"
-                      className="w-full sm:w-auto"
-                    >
+
+                  <div className="flex justify-end gap-3 pt-2">
+                    <Button slot="close" className='bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full py-3 text-sm font-medium'>
                       Cancel
                     </Button>
-
                     <Button
                       type="submit"
                       slot="close"
-                      className="w-full sm:w-auto"
+                      className="bg-teal-500 hover:bg-teal-600 text-white rounded-full py-3 text-sm font-medium"
                     >
-                      Update Destination
+                      Update Room
                     </Button>
                   </div>
-                </form> */}
+                </form>
               </Surface>
             </Modal.Body>
           </Modal.Dialog>

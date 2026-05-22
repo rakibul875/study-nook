@@ -32,9 +32,8 @@ const AddRoomsPage = () => {
     });
 
     const roomData = await res.json();
-    if(roomData){
       alert('Room Add Successfully')
-    }
+  
   };
 
   return (
