@@ -1,8 +1,17 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { FaCalendarDays, FaStar } from "react-icons/fa6";
+import { EditPage } from "./EditPage";
+import { DeletePage } from "./Deletepage";
 
 const BookNowCard = ({ data }) => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  const currentUserId = user?.id;
+  const userId = data.userId;
+  const currentUser = currentUserId === userId;
   const hourlyRate = data?.hourlyRate;
 
   const [bookingDate, setBookingDate] = useState("2026-05-21");
@@ -20,15 +29,17 @@ const BookNowCard = ({ data }) => {
   const hour = selectedTime.hours;
   const totalAmount = hourlyRate * hour;
 
- 
   const handleBookingSubmit = () => {
+    if (!user) {
+      redirect("/login");
+    }
     const bookingDetails = {
       roomId: data?.id,
-      roomName: data?.name ,
-      date: bookingDate, 
-      timeSlot: selectedTime.time, 
+      roomName: data?.name,
+      date: bookingDate,
+      timeSlot: selectedTime.time,
       totalHours: hour,
-      totalPrice: totalAmount, 
+      totalPrice: totalAmount,
     };
 
     console.log("Booking Object:", bookingDetails);
@@ -116,10 +127,18 @@ const BookNowCard = ({ data }) => {
       >
         Book Now
       </button>
-
-      <p className="text-center text-[11px] text-gray-400 font-medium mt-3">
-        You won't be charged yet
-      </p>
+      <div className="">
+        {currentUser ? (
+          <div className="">
+            <EditPage />
+            <DeletePage />
+          </div>
+        ) : (
+          <p className="text-center text-[11px] text-gray-400 font-medium mt-3">
+            You won't be charged yet
+          </p>
+        )}
+      </div>
     </div>
   );
 };

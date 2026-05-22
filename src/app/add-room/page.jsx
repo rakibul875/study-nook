@@ -1,9 +1,12 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Card, Input, Label, TextArea, TextField } from "@heroui/react";
 import React, { useState } from "react";
 
 const AddRoomsPage = () => {
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
   const [selectedAmenities, setSelectedAmenities] = useState([]);
 
   const toggleAmenity = (value) => {
@@ -17,8 +20,8 @@ const AddRoomsPage = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     data.amenities = selectedAmenities;
-    data.userName=user?.name;
-    console.log(data)
+    data.userEmail=user?.email;
+    data.userId=user?.id
 
     const res = await fetch("http://localhost:8000/rooms", {
       method: "POST",
@@ -29,7 +32,9 @@ const AddRoomsPage = () => {
     });
 
     const roomData = await res.json();
-    console.log(roomData);
+    if(roomData){
+      alert('Room Add Successfully')
+    }
   };
 
   return (

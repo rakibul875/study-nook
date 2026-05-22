@@ -9,9 +9,7 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 const NavBar = () => {
   const { data: session } = authClient.useSession();
-  console.log(session);
   const user = session?.user;
-  console.log(user);
   const router = useRouter();
   const handelSgnOut = async () => {
     await authClient.signOut();

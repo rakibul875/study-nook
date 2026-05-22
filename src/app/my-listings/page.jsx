@@ -1,9 +1,27 @@
+import RoomCard from '@/components/RoomCard';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import React from 'react';
 
-const myListingsPage = () => {
+const myListingsPage = async () => {
+    const session = await auth.api.getSession({
+    headers: await headers(), 
+  })
+  const user=session?.user
+  const currentUserId=user?.id
+
+    const res= await fetch(`http://localhost:8000/my-rooms/${currentUserId}`)
+    const rooms=await res.json()
+    const userId=rooms.userId
+    const currentUser=userId===currentUserId
+    
     return (
-        <div>
-            my-listings
+        <div className='container mx-auto mt-10'>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {
+                    rooms.map(room=><RoomCard key={room._id} room={room}/>)
+                }
+            </div>
         </div>
     );
 };
