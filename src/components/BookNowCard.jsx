@@ -28,7 +28,7 @@ const BookNowCard = ({ data }) => {
   ];
   const hour = selectedTime.hours;
   const totalAmount = hourlyRate * hour;
- const router = useRouter()
+  const router = useRouter();
   const handleBookingSubmit = async () => {
     if (!user) {
       router.push("/login");
@@ -41,25 +41,34 @@ const BookNowCard = ({ data }) => {
       timeSlot: selectedTime.time,
       totalHours: hour,
       totalPrice: totalAmount,
-      userId:user?.id,
-      userEmail:user?.email,
-      
+      userId: user?.id,
+      userEmail: user?.email,
+      status: "confirmed",
+      imageUrl: data.imageUrl,
     };
-    console.log('Booking Details', bookingDetails)
 
-     const res = await fetch("http://localhost:8000/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookingDetails),
-    })
-    const result=await res.json()
+    try {
+      const res = await fetch("http://localhost:8000/bookings", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(bookingDetails),
+      });
+      const result = await res.json();
 
-    console.log("Booking data:", result);
-    alert(
-      `Booking confirmed for ${bookingDetails.timeSlot} on ${bookingDetails.date}`,
-    );
+      if (!result.success) {
+        alert(result.message);
+        return;
+      }
+      console.log("Booking data:", result);
+      alert(
+        `Booking confirmed for ${bookingDetails.timeSlot} on ${bookingDetails.date}`,
+      );
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
   };
 
   return (
@@ -144,8 +153,8 @@ const BookNowCard = ({ data }) => {
       <div className="">
         {currentUser ? (
           <div className="flex items-center mt-5 gap-2 justify-center">
-            <EditPage data={data}/>
-            <DeletePage  data={data}/>
+            <EditPage data={data} />
+            <DeletePage data={data} />
           </div>
         ) : (
           <p className="text-center text-[11px] text-gray-400 font-medium mt-3">

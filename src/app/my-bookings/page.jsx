@@ -1,9 +1,20 @@
+import { auth } from "@/lib/auth";
 import { Button, Table } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 import { AiOutlineAlignCenter } from "react-icons/ai";
 import { FaDownload } from "react-icons/fa6";
 
-const myBookingsPage = () => {
+const myBookingsPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const user = session?.user;
+  const userId = user?.id;
+
+  const res = await fetch(`http://localhost:8000/bookings/${userId}`);
+  const userBookingData = await res.json();
+
   return (
     <div className="container mx-auto mt-10">
       <div className="flex justify-between">
@@ -35,13 +46,31 @@ const myBookingsPage = () => {
                 <Table.Column>Action</Table.Column>
               </Table.Header>
               <Table.Body>
-                <Table.Row>
-                  <Table.Cell>Kate Moore</Table.Cell>
-                  <Table.Cell>CEO</Table.Cell>
-                  <Table.Cell>Active</Table.Cell>
-                  <Table.Cell>kate@acme.com</Table.Cell>
-                  <Table.Cell> <Button variant="outline">Cancel</Button> </Table.Cell>
-                </Table.Row>
+                {userBookingData.map((userBooking) => (
+                  <Table.Row key={userBooking._id}>
+                    <Table.Cell>{userBooking.roomName}</Table.Cell>
+                    <Table.Cell>{userBooking.date}</Table.Cell>
+                    <Table.Cell>{userBooking.timeSlot}</Table.Cell>
+                    <Table.Cell>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium
+                                ${
+                                  userBooking.status === "confirmed"
+                                    ? "bg-green-300 text-green-600"
+                                    : userBooking.status === "cancelled"
+                                      ? "bg-red-100 text-red-600"
+                                      : "bg-gray-100 text-gray-500"
+                                }
+                               `}
+                      >
+                        {userBooking.status}
+                      </span>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Button variant="outline">Cancel</Button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
               </Table.Body>
             </Table.Content>
           </Table.ScrollContainer>
