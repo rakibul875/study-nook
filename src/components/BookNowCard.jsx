@@ -1,6 +1,6 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaCalendarDays, FaStar } from "react-icons/fa6";
 import { EditPage } from "./EditPage";
@@ -28,21 +28,35 @@ const BookNowCard = ({ data }) => {
   ];
   const hour = selectedTime.hours;
   const totalAmount = hourlyRate * hour;
-
-  const handleBookingSubmit = () => {
+ const router = useRouter()
+  const handleBookingSubmit = async () => {
     if (!user) {
-      redirect("/login");
+      router.push("/login");
+      return;
     }
     const bookingDetails = {
-      roomId: data?.id,
+      roomId: data?._id,
       roomName: data?.name,
       date: bookingDate,
       timeSlot: selectedTime.time,
       totalHours: hour,
       totalPrice: totalAmount,
+      userId:user?.id,
+      userEmail:user?.email,
+      
     };
+    console.log('Booking Details', bookingDetails)
 
-    console.log("Booking Object:", bookingDetails);
+     const res = await fetch("http://localhost:8000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingDetails),
+    })
+    const result=await res.json()
+
+    console.log("Booking data:", result);
     alert(
       `Booking confirmed for ${bookingDetails.timeSlot} on ${bookingDetails.date}`,
     );

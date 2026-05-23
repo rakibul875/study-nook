@@ -6,7 +6,7 @@ import React from 'react';
 
 const RoomsDetails = async({params}) => {
     const {roomId}=await params
-    console.log(roomId)
+
     const res=await fetch(`http://localhost:8000/rooms/${roomId}`)
     const data=await res.json()
     return (
