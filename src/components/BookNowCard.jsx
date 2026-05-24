@@ -48,11 +48,13 @@ const BookNowCard = ({ data }) => {
       imageUrl: data.imageUrl,
     };
 
+    const {data:tokenData}=await authClient.token();
     try {
       const res = await fetch("http://localhost:8000/bookings", {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization:`bearer ${tokenData?.token}`
         },
         body: JSON.stringify(bookingDetails),
       });

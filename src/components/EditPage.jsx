@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Input,
@@ -14,7 +15,8 @@ import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 
 export function EditPage({ data }) {
-  const {_id,name,description,floor,hourlyRate,capacity,imageUrl}=data;
+  const { _id, name, description, floor, hourlyRate, capacity, imageUrl } =
+    data;
   const [selectedAmenities, setSelectedAmenities] = useState([]);
 
   const toggleAmenity = (value) => {
@@ -23,20 +25,21 @@ export function EditPage({ data }) {
     );
   };
 
-  const onSubmit =async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-       const res = await fetch(`http://localhost:8000/rooms/${_id}`, {
+    const { data: tokenData } = await authClient.token();
+    const res = await fetch(`http://localhost:8000/rooms/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(data),
     });
 
     const roomData = await res.json();
-    
   };
   return (
     <Modal>
@@ -78,7 +81,11 @@ export function EditPage({ data }) {
                     />
                   </TextField>
 
-                  <TextField name="description" defaultValue={description} isRequired>
+                  <TextField
+                    name="description"
+                    defaultValue={description}
+                    isRequired
+                  >
                     <Label>Description</Label>
                     <TextArea
                       placeholder="Describe the atmosphere and unique features..."
@@ -95,7 +102,11 @@ export function EditPage({ data }) {
                       />
                     </TextField>
 
-                    <TextField name="hourlyRate" defaultValue={hourlyRate} isRequired>
+                    <TextField
+                      name="hourlyRate"
+                      defaultValue={hourlyRate}
+                      isRequired
+                    >
                       <Label>Hourly Rate ($)</Label>
                       <Input
                         placeholder="25"
@@ -103,7 +114,11 @@ export function EditPage({ data }) {
                       />
                     </TextField>
 
-                    <TextField name="capacity" defaultValue={capacity} isRequired>
+                    <TextField
+                      name="capacity"
+                      defaultValue={capacity}
+                      isRequired
+                    >
                       <Label>Capacity</Label>
                       <Input
                         placeholder="6"
@@ -111,7 +126,11 @@ export function EditPage({ data }) {
                       />
                     </TextField>
 
-                    <TextField name="imageUrl" defaultValue={imageUrl} isRequired>
+                    <TextField
+                      name="imageUrl"
+                      defaultValue={imageUrl}
+                      isRequired
+                    >
                       <Label>Room Image URL</Label>
                       <Input
                         placeholder="https://..."
@@ -155,7 +174,10 @@ export function EditPage({ data }) {
                   </div>
 
                   <div className="flex justify-end gap-3 pt-2">
-                    <Button slot="close" className='bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full py-3 text-sm font-medium'>
+                    <Button
+                      slot="close"
+                      className="bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full py-3 text-sm font-medium"
+                    >
                       Cancel
                     </Button>
                     <Button

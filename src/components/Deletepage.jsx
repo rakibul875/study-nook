@@ -1,22 +1,26 @@
 "use client";
-
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { MdOutlineDelete } from "react-icons/md";
 
-export function DeletePage ({data}) {
-    const {_id,name}=data;
-    const handelDelete=async()=>{
-         const res = await fetch(`http://localhost:8000/rooms/${_id}`, {
+export function DeletePage({ data }) {
+  const { _id, name } = data;
+  const router = useRouter()
+  const handelDelete = async () => {
+    const {data:tokenData}=await authClient.token()
+    
+    const res = await fetch(`http://localhost:8000/rooms/${_id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization:`bearer ${tokenData?.token}`
       },
     });
 
     const data = await res.json();
-    redirect('/rooms')
-    }
+    router.push('/rooms')
+  };
   return (
     <AlertDialog>
       <Button className="border border-red-500 bg-white text-red-500 hover:bg-gray-100 rounded px-5 py-5">
@@ -33,9 +37,9 @@ export function DeletePage ({data}) {
             </AlertDialog.Header>
             <AlertDialog.Body>
               <p>
-                Are you sure you want to delete <strong> {name}</strong>{" "}
-                This action cannot be undone and will permanently remove this
-                travel package from the system.
+                Are you sure you want to delete <strong> {name}</strong> This
+                action cannot be undone and will permanently remove this travel
+                package from the system.
               </p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
