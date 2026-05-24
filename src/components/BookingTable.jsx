@@ -20,9 +20,7 @@ const BookingTable = ({ userBookingData }) => {
 
       if (data.modifiedCount > 0) {
         const updated = bookings.map((booking) =>
-          booking._id === id
-            ? { ...booking, status: "cancelled" }
-            : booking
+          booking._id === id ? { ...booking, status: "cancelled" } : booking,
         );
         setBookings(updated);
       }
@@ -58,8 +56,8 @@ const BookingTable = ({ userBookingData }) => {
                         booking.status === "confirmed"
                           ? "bg-green-300 text-green-600"
                           : booking.status === "cancelled"
-                          ? "bg-red-100 text-red-600"
-                          : "bg-gray-100 text-gray-500"
+                            ? "bg-red-100 text-red-600"
+                            : "bg-gray-100 text-gray-500"
                       }`}
                     >
                       {booking.status}
@@ -67,13 +65,17 @@ const BookingTable = ({ userBookingData }) => {
                   </Table.Cell>
 
                   <Table.Cell>
-                    <Button
-                      variant="outline"
-                      disabled={booking.status === "cancelled"}
-                      onClick={() => handleCancel(booking._id)}
-                    >
-                      Cancel
-                    </Button>
+                    {booking.status === "cancelled" ? (
+                      "__"
+                    ) : (
+                      <Button
+                        variant="outline"
+                        disabled={booking.status === "cancelled"}
+                        onClick={() => handleCancel(booking._id)}
+                      >
+                        Cancel
+                      </Button>
+                    )}
                   </Table.Cell>
                 </Table.Row>
               ))}
