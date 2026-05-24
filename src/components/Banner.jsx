@@ -3,40 +3,42 @@
 import Image from "next/image";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa6";
-import banner from '@/assets/image/banner-1.jpg'
-import hero from '@/assets/image/banner-2.jpg'
+import banner from "@/assets/image/banner-1.jpg";
+import hero from "@/assets/image/banner-2.jpg";
+import Link from "next/link";
 
 const Banner = () => {
   return (
-    <section className="bg-[#eef4f6] overflow-hidden">
+    <section className="bg-[#eef4f6] overflow-hidden mt-2">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-14">
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#111827]">
-              Find Your{" "}
-              <span className="text-cyan-600">Perfect</span>
+              Find Your <span className="text-cyan-600">Perfect</span>
               <br />
               Study Room
             </h1>
 
             <p className="mt-6 text-gray-600 text-base md:text-lg max-w-lg leading-8">
-              Browse and book quiet, private study rooms in your
-              library. Designed for students who demand focused flow
-              and premium environments.
+              Browse and book quiet, private study rooms in your library.
+              Designed for students who demand focused flow and premium
+              environments.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 mt-10">
-              <button className="bg-cyan-700 hover:bg-cyan-700 text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300">
-                Explore Rooms
-                <FaArrowRight />
-              </button>
+              <Link href={'/rooms'}>
+                <button className="bg-cyan-700 hover:bg-cyan-700 text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300">
+                  Explore Rooms
+                  <FaArrowRight />
+                </button>
+              </Link>
 
               <button className="border-2 border-cyan-700 text-cyan-700 hover:bg-cyan-700 hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-300">
                 Become a Host
               </button>
             </div>
           </div>
-          
+
           <div className="relative flex justify-center items-center min-h-125">
             <div className="relative w-65 md:w-[320px] lg:w-90 rotate-[-6deg] shadow-2xl rounded-3xl overflow-hidden">
               <Image
@@ -52,14 +54,10 @@ const Banner = () => {
                   <h3 className="font-semibold text-sm md:text-base">
                     The Zenith Pod
                   </h3>
-                  <p className="text-xs text-gray-500">
-                    Quiet Study Room
-                  </p>
+                  <p className="text-xs text-gray-500">Quiet Study Room</p>
                 </div>
 
-                <span className="font-bold text-cyan-700">
-                  $12/hr
-                </span>
+                <span className="font-bold text-cyan-700">$12/hr</span>
               </div>
             </div>
 
@@ -73,13 +71,9 @@ const Banner = () => {
               />
 
               <div className="p-4">
-                <h4 className="font-semibold text-sm">
-                  Quiet Zone
-                </h4>
+                <h4 className="font-semibold text-sm">Quiet Zone</h4>
 
-                <p className="text-xs text-gray-500 mt-1">
-                  98% Focus Score
-                </p>
+                <p className="text-xs text-gray-500 mt-1">98% Focus Score</p>
               </div>
             </div>
 

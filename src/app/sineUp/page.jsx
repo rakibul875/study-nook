@@ -31,7 +31,7 @@ const SignUpPage = () => {
 
     if (data) {
       alert('SignUp Successful');
-      redirect('/');
+      redirect('/login');
     }
     if (error) {
       alert(error.message);
