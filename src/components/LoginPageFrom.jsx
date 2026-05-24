@@ -12,6 +12,7 @@ import { FaGoogle, FaApple, FaEnvelope, FaLock } from "react-icons/fa6";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const LoginPageFrom = () => {
      const handelLogin = async (e) => {
@@ -28,11 +29,11 @@ const LoginPageFrom = () => {
         console.log(data);
     
         if (data) {
-          alert("Login Successful");
+          toast.success("Login Successful");
           redirect("/");
         }
         if (error) {
-          alert(error.message);
+          toast.error(error.message);
         }
       };
     

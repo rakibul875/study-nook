@@ -2,6 +2,7 @@
 
 import { Button, Table } from "@heroui/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const BookingTable = ({ userBookingData }) => {
   const [bookings, setBookings] = useState(userBookingData);
@@ -25,7 +26,7 @@ const BookingTable = ({ userBookingData }) => {
         setBookings(updated);
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

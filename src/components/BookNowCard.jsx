@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { FaCalendarDays, FaStar } from "react-icons/fa6";
 import { EditPage } from "./EditPage";
 import { DeletePage } from "./Deletepage";
+import toast from "react-hot-toast";
 
 const BookNowCard = ({ data }) => {
   const { data: session } = authClient.useSession();
@@ -58,16 +59,16 @@ const BookNowCard = ({ data }) => {
       const result = await res.json();
 
       if (!result.success) {
-        alert(result.message);
+        toast.error(result.message);
         return;
       }
       console.log("Booking data:", result);
-      alert(
+      toast.success(
         `Booking confirmed for ${bookingDetails.timeSlot} on ${bookingDetails.date}`,
       );
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

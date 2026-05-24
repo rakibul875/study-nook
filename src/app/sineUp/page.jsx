@@ -13,6 +13,7 @@ import { FaGoogle, FaApple, FaUser, FaEnvelope, FaLock, FaImage } from "react-ic
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const handelRegister = async (e) => {
@@ -30,11 +31,11 @@ const SignUpPage = () => {
     });
 
     if (data) {
-      alert('SignUp Successful');
+      toast.success('SignUp Successful');
       redirect('/login');
     }
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
