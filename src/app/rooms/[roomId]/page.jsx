@@ -10,9 +10,18 @@ export const metadata = {
 };
 
 const RoomsDetails = async({params}) => {
-    const {roomId}=await params
+    const {roomId}=await params;
+    const {token}= await auth.api.getToken({
+        headers: await headers()
+    })
 
-    const res=await fetch(`http://localhost:8000/rooms/${roomId}`)
+    console.log(token)
+
+    const res=await fetch(`http://localhost:8000/rooms/${roomId}`,{
+        headers:{
+            authorization:`bearer ${token}`
+        }
+    })
     const data=await res.json()
     return (
         <div className=''>
