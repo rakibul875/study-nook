@@ -1,6 +1,6 @@
+import BookingTable from "@/components/BookingTable";
 import NoDataFound from "@/components/NoDataFound";
 import { auth } from "@/lib/auth";
-import { Button, Table } from "@heroui/react";
 import { headers } from "next/headers";
 import React from "react";
 import { AiOutlineAlignCenter } from "react-icons/ai";
@@ -15,7 +15,6 @@ const myBookingsPage = async () => {
 
   const res = await fetch(`http://localhost:8000/bookings/${userId}`);
   const userBookingData = await res.json();
-  console.log(userBookingData);
   const userDataLength = userBookingData.length;
 
   return (
@@ -39,51 +38,7 @@ const myBookingsPage = async () => {
               </button>
             </div>
           </div>
-          <div className="my-10">
-            <Table variant="secondary">
-              <Table.ScrollContainer>
-                <Table.Content
-                  aria-label="Team members"
-                  className="min-w-[600px]"
-                >
-                  <Table.Header>
-                    <Table.Column isRowHeader>Room Name</Table.Column>
-                    <Table.Column>Booking Date</Table.Column>
-                    <Table.Column>Booking Time</Table.Column>
-                    <Table.Column>Status</Table.Column>
-                    <Table.Column>Action</Table.Column>
-                  </Table.Header>
-                  <Table.Body>
-                    {userBookingData.map((userBooking) => (
-                      <Table.Row key={userBooking._id}>
-                        <Table.Cell>{userBooking.roomName}</Table.Cell>
-                        <Table.Cell>{userBooking.date}</Table.Cell>
-                        <Table.Cell>{userBooking.timeSlot}</Table.Cell>
-                        <Table.Cell>
-                          <span
-                            className={`px-3 py-1 rounded-full text-sm font-medium
-                                ${
-                                  userBooking.status === "confirmed"
-                                    ? "bg-green-300 text-green-600"
-                                    : userBooking.status === "cancelled"
-                                      ? "bg-red-100 text-red-600"
-                                      : "bg-gray-100 text-gray-500"
-                                }
-                               `}
-                          >
-                            {userBooking.status}
-                          </span>
-                        </Table.Cell>
-                        <Table.Cell>
-                          <Button variant="outline">Cancel</Button>
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table.Content>
-              </Table.ScrollContainer>
-            </Table>
-          </div>
+          <BookingTable userBookingData={userBookingData}/>
         </div>
       ) : (
         <div>
