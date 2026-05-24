@@ -1,3 +1,4 @@
+import NoDataFound from "@/components/NoDataFound";
 import { auth } from "@/lib/auth";
 import { Button, Table } from "@heroui/react";
 import { headers } from "next/headers";
@@ -34,7 +35,7 @@ const myBookingsPage = async () => {
           </button>
         </div>
       </div>
-      <div className="">
+      <div className="my-10">
         <Table variant="secondary">
           <Table.ScrollContainer>
             <Table.Content aria-label="Team members" className="min-w-[600px]">
@@ -75,6 +76,7 @@ const myBookingsPage = async () => {
             </Table.Content>
           </Table.ScrollContainer>
         </Table>
+        <NoDataFound />
       </div>
     </div>
   );
