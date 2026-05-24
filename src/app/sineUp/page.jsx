@@ -38,6 +38,12 @@ const SignUpPage = () => {
     }
   };
 
+  const handelGoogleSineUP=async()=>{
+    const data = await authClient.signIn.social({
+    provider: "google",
+  })
+  }
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-tr from-[#eef2f3] to-[#e4efe9] p-4 font-sans">
       <div className="w-full max-w-[440px] bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
@@ -162,7 +168,7 @@ const SignUpPage = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mb-6">
-          <button className="btn items-center shadow-sm">
+          <button onClick={handelGoogleSineUP} className="btn items-center shadow-sm">
             <FaGoogle className="text-red-500 text-sm" /> Google
           </button>
           <button className="btn items-center shadow-sm">

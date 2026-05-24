@@ -1,18 +1,23 @@
-import Banner from '@/components/Banner';
-import HomeRoomCard from '@/components/HomeRoomCard';
-import RoomCard from '@/components/RoomCard';
-import Status from '@/components/Status';
-import WheyStudy from '@/components/WheyStudy';
-import { Button } from '@heroui/react';
-import React from 'react';
+import Banner from "@/components/Banner";
+import HomeRoomCard from "@/components/HomeRoomCard";
+
+import Status from "@/components/Status";
+import WheyStudy from "@/components/WheyStudy";
+
+import React from "react";
+
+export const metadata = {
+  title: "Study Nook - Home",
+  description: "Beast Study Rooms",
+};
 
 const HomePage = () => {
   return (
     <div>
-     <Banner/>
-     <HomeRoomCard/>
-     <WheyStudy/>
-     <Status/>
+      <Banner />
+      <HomeRoomCard />
+      <WheyStudy />
+      <Status />
     </div>
   );
 };

@@ -3,6 +3,11 @@ import RoomCard from "@/components/RoomCard";
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "Study Nook - Rooms",
+  description: "Beast Study Rooms",
+};
+
 const RoomsPage = async ({ searchParams }) => {
   const params = await searchParams;
 

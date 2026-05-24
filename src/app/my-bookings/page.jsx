@@ -6,6 +6,11 @@ import React from "react";
 import { AiOutlineAlignCenter } from "react-icons/ai";
 import { FaDownload } from "react-icons/fa6";
 
+export const metadata = {
+  title: "Study Nook - My Booking",
+  description: "Beast Study Rooms",
+};
+
 const myBookingsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

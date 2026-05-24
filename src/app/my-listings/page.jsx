@@ -4,6 +4,11 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import React from "react";
 
+export const metadata = {
+  title: "Study Nook - My Listing",
+  description: "Beast Study Rooms",
+};
+
 const myListingsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
