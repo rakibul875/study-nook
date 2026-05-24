@@ -72,9 +72,9 @@ const NavBar = () => {
           </div>
           <Link
             href={"/"}
-            className="btn btn-ghost text-orange-500 font-bold text-2xl"
+            className="btn btn-ghost text-cyan-600 font-bold text-2xl"
           >
-            SOLSTICE
+            StudyRoom
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -109,10 +109,12 @@ const NavBar = () => {
                   </div>
                   <Dropdown.Menu>
                     <Dropdown.Item id="dashboard" textValue="Dashboard">
-                      <Label>Dashboard</Label>
+                      
+                      <Link href={'/my-listings'}>My-Listings</Link>
                     </Dropdown.Item>
                     <Dropdown.Item id="profile" textValue="Profile">
-                      <Label>Profile</Label>
+                     
+                      <Link href={'/my-bookings'}>My-Bookings</Link>
                     </Dropdown.Item>
                     <Dropdown.Item
                       id="logout"
