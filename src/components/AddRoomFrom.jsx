@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Button, Card, Input, Label, TextArea, TextField } from "@heroui/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 const AddRoomFrom = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -32,10 +33,8 @@ const AddRoomFrom = () => {
 
     const roomData = await res.json();
     console.log(roomData)
-    alert('Booking successful')
-    if (roomData?.insertedId || roomData?.acknowledged) {
-      alert("Room added successfully");
-    }
+    toast.success('Booking successful')
+   window.location.reload()
   };
   return (
     <div>
