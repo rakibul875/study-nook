@@ -20,7 +20,7 @@ const HomeRoomCard = async () => {
           </button>
         </Link>
       </div>
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {rooms.map((room) => (
           <RoomCard key={room._id} room={room}/>
         ))}
