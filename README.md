@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📚 StudyNook - Smart Study Space Booking Platform
 
-## Getting Started
+StudyNook is a premium, modern, and highly responsive MERN stack application designed to simplify booking quiet, private study rooms and spaces in libraries, campuses, or co-working hubs. Built with a focus on seamless user experience, performance, and dark-themed premium design aesthetics.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo & Links
+- **Live Client Application:** [https://study-nook-frontend.vercel.app](https://study-nook-frontend.vercel.app)
+- **Live Server API URL:** [https://your-live-backend-api.com](https://study-nook-server-ten.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🌟 Core Capabilities
+- **Instant Booking:** Book study slots effortlessly without waiting for manual approvals.
+- **Conflict-Free Scheduling:** An optimized scheduling layout ensures zero double-bookings or scheduling mishaps.
+- **Dynamic Theme Toggling:** Seamless transition between premium light and elegant dark modes powered by `next-themes` and `HeroUI`.
+- **Responsive Layouts:** Visually striking, pixel-perfect experiences optimized for mobile, tablet, and desktop screens.
 
-## Learn More
+### 👤 For Students / Users
+- **Advanced Room Filtering:** Filter available rooms by location, capacity, hourly rates, and specific amenities (Wi-Fi, soundproofing, AC, whiteboard, projector).
+- **Personal Dashboard:** Track booking histories, manage upcoming reservations, or safely cancel slots with instant status synchronization.
+- **Dynamic Meta Titles:** Completely SEO-optimized routes showing page-specific browser dynamic tab titles without hydration errors.
 
-To learn more about Next.js, take a look at the following resources:
+### 🛠️ For Administrators / Faculty
+- **Listing Management:** Add, update, and manage your campus or library study spaces dynamically with an interactive, data-driven interface.
+- **Real-Time Usage Tracking:** Keep tabs on room occupancy metrics and total cost configurations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack & Architecture
 
-## Deploy on Vercel
+### Frontend (Client-Side)
+- **Framework:** Next.js 14+ (App Router Architecture)
+- **UI & Components:** HeroUI (formerly NextUI)
+- **Styling:** Tailwind CSS (Custom Dark Theme Variables)
+- **Authentication:** NextAuth.js / Secure Credentials System
+- **Animations:** GSAP & Smooth Scrolling (Lenis)
+- **Icons & Alerts:** Lucide React, React Icons & React Hot Toast
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Backend (Server-Side)
+- **Runtime Environment:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB (Native Driver / Atlas Cloud)
+- **Security:** JSON Web Tokens (JWT) Verification for API Endpoints, CORS Policy Middleware
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
