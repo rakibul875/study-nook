@@ -4,8 +4,12 @@ import { FaMailBulk } from "react-icons/fa";
 import {
   FaCamera,
   FaEarthAsia,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
   FaLocationArrow,
   FaPhone,
+  FaX,
 } from "react-icons/fa6";
 
 const Footer = () => {
@@ -16,14 +20,14 @@ const Footer = () => {
           <aside>
             <h1 className="text-cyan-700 text-xl">StudyNook</h1>
             <p className="text-lg">
-              © 2026 StudyNook. Focused flow <br/> for modern learners.
+              © 2026 StudyNook. Focused flow <br /> for modern learners.
             </p>
             <div className="flex items-center gap-2 text-xl mt-3">
-              <CiShare2 />
-              <FaEarthAsia />
-              <FaCamera />
+              <FaFacebook />
+              <FaInstagram/>
+              <FaLinkedin/>
+              <FaX />
             </div>
-            
           </aside>
         </nav>
         <nav>
