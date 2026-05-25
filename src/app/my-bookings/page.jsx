@@ -21,7 +21,7 @@ const myBookingsPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/bookings/${userId}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_UEL}/bookings/${userId}`, {
     headers: {
       authorization: `bearer ${token}`,
     },

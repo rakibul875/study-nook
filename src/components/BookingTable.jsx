@@ -11,7 +11,7 @@ const BookingTable = ({ userBookingData }) => {
   const handleCancel = async (id) => {
     try {
       const { data: tokenData } = await authClient.token();
-      const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/bookings/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_UEL}/bookings/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

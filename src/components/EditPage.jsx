@@ -30,7 +30,7 @@ export function EditPage({ data }) {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/rooms/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_UEL}/rooms/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

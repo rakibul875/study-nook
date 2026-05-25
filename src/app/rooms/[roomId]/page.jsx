@@ -15,7 +15,7 @@ const RoomsDetails = async ({ params }) => {
     headers: await headers(),
   });
 
-  const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/rooms/${roomId}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_UEL}/rooms/${roomId}`, {
     headers: {
       authorization: `bearer ${token}`,
     },

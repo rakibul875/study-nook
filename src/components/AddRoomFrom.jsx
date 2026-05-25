@@ -21,7 +21,7 @@ const AddRoomFrom = () => {
     data.userEmail = user?.email;
     data.userId = user?.id;
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/rooms`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_UEL}/rooms`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
