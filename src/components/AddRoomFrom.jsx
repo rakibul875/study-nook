@@ -1,6 +1,8 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import { Button, Card, Input, Label, TextArea, TextField } from "@heroui/react";
+import { reddit } from "better-auth";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 const AddRoomFrom = () => {
@@ -34,7 +36,7 @@ const AddRoomFrom = () => {
     const roomData = await res.json();
     console.log(roomData)
     toast.success('Booking successful')
-   window.location.reload()
+    redirect('/my-listings')
   };
   return (
     <div>
