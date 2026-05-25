@@ -13,6 +13,7 @@ const RoomCard = ({ room }) => {
     if (item === "whiteboard") return "Whiteboard";
     return item;
   };
+
   const amenityIcon = (item) => {
     if (item === "wifi") return <FaWifi />;
     if (item === "projector") return <LuProjector />;
@@ -21,7 +22,7 @@ const RoomCard = ({ room }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition flex flex-col h-full">
       <div className="relative">
         <Image
           src={room.imageUrl}
@@ -36,7 +37,7 @@ const RoomCard = ({ room }) => {
         </div>
       </div>
 
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-3 flex-1 flex flex-col">
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-lg flex items-center gap-2">
             <MdMeetingRoom className="text-gray-500" />
@@ -54,7 +55,9 @@ const RoomCard = ({ room }) => {
           Floor {room.floor}
         </p>
 
-        <p className="text-xs text-gray-400 line-clamp-2">{room.description}</p>
+        <p className="text-xs text-gray-400 line-clamp-2">
+          {room.description}
+        </p>
 
         <div className="flex flex-wrap gap-2">
           {room.amenities?.map((item, i) => (
@@ -68,7 +71,7 @@ const RoomCard = ({ room }) => {
           ))}
         </div>
 
-        <Link href={`/rooms/${room._id}`}>
+        <Link href={`/rooms/${room._id}`} className="mt-auto">
           <button className="w-full border border-teal-500 text-teal-600 py-2 rounded-full text-sm hover:bg-teal-50 transition">
             View Details
           </button>
