@@ -11,7 +11,7 @@ import {
 const Footer = () => {
   return (
     <div>
-      <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
+      <footer className="footer sm:footer-horizontal bg-gray-200 text-base-content p-10">
         <nav>
           <aside>
             <h1 className="text-cyan-700 text-xl">StudyNook</h1>
