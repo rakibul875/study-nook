@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import RoomCard from "./RoomCard";
 
 const HomeRoomCard = async () => {
-  const res = await fetch("http://localhost:8000/features");
+  const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/features`);
   const rooms = await res.json();
 
   return (

@@ -50,7 +50,7 @@ const BookNowCard = ({ data }) => {
 
     const {data:tokenData}=await authClient.token();
     try {
-      const res = await fetch("http://localhost:8000/bookings", {
+      const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/bookings`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -16,7 +16,7 @@ const RoomsPage = async ({ searchParams }) => {
   const maxRate = params?.maxRate || "";
   const amenities = params?.amenities || "";
 
-  const queryUrl = `http://localhost:8000/rooms?search=${search}&minRate=${minRate}&maxRate=${maxRate}&amenities=${amenities}`;
+  const queryUrl = `${process.env.NEXT_PUBLICK_UEL}/rooms?search=${search}&minRate=${minRate}&maxRate=${maxRate}&amenities=${amenities}`;
 
   const res = await fetch(queryUrl, {
     cache: "no-store",

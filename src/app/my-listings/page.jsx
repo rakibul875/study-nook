@@ -18,7 +18,7 @@ const myListingsPage = async () => {
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });
-  const res = await fetch(`http://localhost:8000/my-rooms/${currentUserId}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/my-rooms/${currentUserId}`, {
     headers:{
       authorization: `bearer ${token}`
     },

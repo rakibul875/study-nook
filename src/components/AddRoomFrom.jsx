@@ -21,7 +21,7 @@ const AddRoomFrom = () => {
     data.userEmail = user?.email;
     data.userId = user?.id;
     const { data: tokenData } = await authClient.token();
-    const res = await fetch("http://localhost:8000/rooms", {
+    const res = await fetch(`${process.env.NEXT_PUBLICK_UEL}/rooms`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,6 +31,7 @@ const AddRoomFrom = () => {
     });
 
     const roomData = await res.json();
+    console.log(roomData)
     alert('Booking successful')
     if (roomData?.insertedId || roomData?.acknowledged) {
       alert("Room added successfully");
