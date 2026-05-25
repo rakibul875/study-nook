@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Table } from "@heroui/react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -9,10 +10,12 @@ const BookingTable = ({ userBookingData }) => {
 
   const handleCancel = async (id) => {
     try {
+      const { data: tokenData } = await authClient.token();
       const res = await fetch(`http://localhost:8000/bookings/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization:`bearer ${tokenData.token}`
         },
         body: JSON.stringify({ status: "cancelled" }),
       });

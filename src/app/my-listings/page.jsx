@@ -15,12 +15,18 @@ const myListingsPage = async () => {
   });
   const user = session?.user;
   const currentUserId = user?.id;
-
-  const res = await fetch(`http://localhost:8000/my-rooms/${currentUserId}`);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const res = await fetch(`http://localhost:8000/my-rooms/${currentUserId}`, {
+    headers:{
+      authorization: `bearer ${token}`
+    },
+  });
   const rooms = await res.json();
   const userId = rooms.userId;
   const currentUser = userId === currentUserId;
-  const roomsLength = rooms.length;
+  const roomsLength = rooms?.length;
   console.log(roomsLength);
   return (
     <div className="container mx-auto mt-10">

@@ -17,8 +17,15 @@ const myBookingsPage = async () => {
   });
   const user = session?.user;
   const userId = user?.id;
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
 
-  const res = await fetch(`http://localhost:8000/bookings/${userId}`);
+  const res = await fetch(`http://localhost:8000/bookings/${userId}`, {
+    headers: {
+      authorization: `bearer ${token}`,
+    },
+  });
   const userBookingData = await res.json();
   const userDataLength = userBookingData.length;
 
@@ -43,7 +50,7 @@ const myBookingsPage = async () => {
               </button>
             </div>
           </div>
-          <BookingTable userBookingData={userBookingData}/>
+          <BookingTable userBookingData={userBookingData} />
         </div>
       ) : (
         <div>
