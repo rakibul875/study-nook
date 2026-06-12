@@ -33,7 +33,7 @@ const RoomCard = ({ room }) => {
       whileHover={{ y: -8 }}
       className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full"
     >
-      {/* Image Section */}
+  
       <div className="relative overflow-hidden">
         <motion.div
           whileHover={{ scale: 1.08 }}
@@ -53,7 +53,7 @@ const RoomCard = ({ room }) => {
         </div>
       </div>
 
-      {/* Content */}
+
       <div className="p-4 space-y-3 flex-1 flex flex-col">
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-lg flex items-center gap-2 text-gray-800">
@@ -76,7 +76,7 @@ const RoomCard = ({ room }) => {
           {room.description}
         </p>
 
-        {/* Amenities */}
+     
         <div className="flex flex-wrap gap-2">
           {room.amenities?.map((item, i) => (
             <motion.span
@@ -90,7 +90,7 @@ const RoomCard = ({ room }) => {
           ))}
         </div>
 
-        {/* Button */}
+        
         <Link href={`/rooms/${room._id}`} className="mt-auto">
           <motion.button
             whileHover={{ scale: 1.03 }}
