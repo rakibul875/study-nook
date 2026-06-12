@@ -1,16 +1,44 @@
+// import React from "react";
+
+// const loading = () => {
+//   return (
+//     <div className="container mx-auto mt-20 mb-10 rounded-2xl">
+//       <div className="bg-[#f4f8fa] p-20">
+//         <div className="flex justify-center items-center">
+//           <span className="loading loading-spinner loading-xl"></span>
+//         </div>
+//         <h1 className="text-xl font-semibold text-center">Loading...</h1>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default loading;
+
 import React from "react";
 
-const loading = () => {
+const Loading = () => {
   return (
-    <div className="container mx-auto mt-20 mb-10 rounded-2xl">
-      <div className="bg-[#f4f8fa] p-20">
-        <div className="flex justify-center items-center">
-          <span className="loading loading-spinner loading-xl"></span>
+    <div className="container mx-auto mt-20 mb-10 px-4">
+      <div className="bg-[#f4f8fa] rounded-2xl p-10 md:p-20">
+        
+        {/* Skeleton Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+          {[1, 2, 3].map((item) => (
+            <div
+              key={item}
+              className="bg-white rounded-2xl p-5 shadow-sm animate-pulse"
+            >
+              <div className="h-40 bg-gray-200 rounded-xl mb-4"></div>
+
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+            </div>
+          ))}
         </div>
-        <h1 className="text-xl font-semibold text-center">Loading...</h1>
       </div>
     </div>
   );
 };
 
-export default loading;
+export default Loading;
